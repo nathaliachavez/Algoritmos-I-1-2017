@@ -20,7 +20,8 @@ do {
 		cout<<"precio no valido.";
 	else total=cantidad * precio;
 }while (precio<0);
-cout<<"total vendido: "< getch();
+cout<<"total vendido: "<<total;
+getch();
 }
 
 
