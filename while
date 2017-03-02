@@ -1,0 +1,21 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+void main()
+
+{
+	int num,i=0;
+	cout<<"escribe un munero entero:";
+	cin>>num;
+	while (i<11)
+	{
+		cout<<i<<"x"<<num<<"="<<num*i<<endl;
+		i++;
+	}
+	getch();
+}
+
+
