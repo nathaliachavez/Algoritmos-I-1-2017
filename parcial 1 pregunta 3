@@ -1,0 +1,75 @@
+// parcial 1 pregunta 3.cpp : Defines the entry point for the console application.
+//
+
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+
+using namespace std;
+
+float discriminantes(float a, float b, float c);
+float unica(float a, float b);
+void imaginaria(float a, float b, float c, float d);
+void reales(float a, float b, float c, float d);
+
+void main()
+{
+	float a,b,c,d,xi,xr,x1,x2;
+
+	cout<<"Ingrese el valor de a:"<<endl;
+	cin>>a;
+	cout<<"Ingrese el valor de b:"<<endl;
+	cin>>b;
+	cout<<"Ingrese el valor de c:"<<endl;
+	cin>>c;
+	d=discriminantes(a,b,c);
+	if(d==0)
+	{
+		x1=unica(a,b);
+		cout<<"La unica solucion es:"<<x1;
+	}
+	else
+	{
+	  if(d>0)
+		reales(a,b,c,d);
+	  else
+		imaginaria(a,b,c,d);
+	}
+	getch();
+}
+
+float discriminantes(float a, float b, float c)
+{
+	float d;
+	d=pow(b,2)-(4*a*c);
+	return d;
+}
+float unica(float a, float b)
+{ 
+	float x1;
+	x1=-b/(2*a);
+	return x1;
+}
+void imaginaria(float a, float b, float c, float d)
+{ 
+	float xi,xr;
+	xi=sqrt(-d)/(2*a);
+	xr=-b/(2*a);
+	cout<<"La primera solucion es:"<<xr<<"+"<<xi<<"i"<<endl;
+	cout<<"La segunda solucion es:"<<xr<<"-"<<xi<<"i"<<endl;
+
+	getch();
+}
+
+void reales(float a, float b, float c, float d)
+{
+	float x1,x2;
+	x1=(-b+sqrt(d))/(2*a);
+	x2=(-b-sqrt(d))/(2*a);
+	cout<<"La solucion 1 es:"<<x1<<endl;
+	cout<<"La solucion 2 es:"<<x2<<endl;
+
+	getch();
+}
