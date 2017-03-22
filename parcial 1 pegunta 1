@@ -1,0 +1,39 @@
+#include "stdafx.h"
+#include <iostream>
+#include"conio.h"
+
+using namespace std;
+
+int nivel_riesgo (int sueldo, bool Historial, bool moroso, int hipoteca);
+ void main(){
+	 int sueldo, hipoteca,c;
+	 bool Historial=false, moroso=false;
+	 cout<<"Ingrese el sueldo:";
+	 cin>>sueldo;
+	 cout<<"Ingrese el Historial del cliente:";
+	 cin>>Historial;
+	 if(Historial==true){
+
+	    cout<<"Inggrese si el cliente es moroso:";
+	    cin>>moroso;
+	 }
+	 cout<<"Ingrese hipoteca del cliente:";
+	 cin>>hipoteca;
+
+	c=nivel_riesgo(sueldo,Historial, moroso,hipoteca);
+	
+	cout<<"El nivel de riesgo es:"<<c;
+	getch();
+ }
+int nivel_riesgo(int sueldo, bool Historial, bool moroso, int hipoteca){
+	 int a=1, b=2, c=3, nivel;
+	 if(((Historial==true)&&(moroso==true))||(hipoteca>sueldo*0.3))
+		 nivel=a;
+	 else
+		 if(((Historial==false)&&(hipoteca<sueldo*0.2))||(hipoteca==true)&&(moroso==false))
+			 nivel=b;
+		 else
+			 nivel=c;
+	 return nivel;
+	 }
+
