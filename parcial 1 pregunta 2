@@ -1,0 +1,33 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "math.h"
+
+using namespace std;
+
+float seriepoten(int n, int x);
+
+void main()
+{
+	int x,n;
+	float serie;
+	do{
+		cout<<"ingrese el valor de x:"<<endl;
+		cin>>x;
+		cout<<"ingrese el valor de n:"<<endl;
+		cin>>n;
+	}while ((n<=0)&&(x<=0));
+	serie=seriepoten (n,x);
+	cout<<"el resultado de la serie es:"<<serie<<endl;
+	getch();
+}
+float seriepoten(int n, int x)
+{
+	float s=0,p;
+	for (int i=1;i<=n;i++)
+	{
+		p=(1+1/i);
+		s=s+pow(p,x);
+	}
+	return s;
+}
