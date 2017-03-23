@@ -1,0 +1,74 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#define MAX 100
+
+using namespace std;
+
+void cargarvector(float a[], int n);
+void ordenar(float a[], int n);
+void vectorfinal (float a[], int n);
+
+void main()
+{
+	int n,j,k,i;
+	float a[MAX];
+	cout<<"introducir el limite:"<<endl;
+	cin>>n;
+	cargarvector(a,n);
+	ordenar(a,n);
+	cout<<"La lista ordenada es: "<<endl;
+	vectorfinal (a,n);
+	for(i=0;i<n;i++)
+		for(j=(i+1);j<n;j++)
+			if(a[i]==a[j])
+			{
+				for(k=j;k<(n-1);k++)
+					a[k]=a[k+1];
+				n=n-1;
+				j=i;
+			}
+	cout<<"La nueva lista tiene "<<n<<" elementos"<<endl;
+	getch();
+}
+void cargarvector(float a[], int n)
+{
+	for (int i=0; i<n; i++)
+	{
+		cout<<"ingrese a["<<i<<"]"<<endl;
+		cin>>a[i];
+	}
+}
+void ordenar(float a[], int n)
+{
+	int i,j,temp;
+	for(i=0;i<n;i++)
+		for(j=(n-1);j>=i;j--)
+			if(a[j-1]>a[j])
+			{
+				temp=a[j-1];
+				a[j-1]=a[j];
+				a[j]=temp;
+			}
+}
+
+void vectorfinal (float a[], int n)
+{
+	for (int i=0; i<n; i++)
+	cout<<"a["<<i<<"]"<<a[i]<<endl;
+}
+void eliminar (float a[], int n)
+{
+	int i,j,k;
+	for (i=0; i<n;i++)
+		for (j=i+1; j<n; j++)
+			if (a[i]==a[j])
+			{
+				for(k=j; k>n-1;k++)
+				{
+					a[k]=a[k+1];
+					n=n-1;
+					j=i;
+				}
+			}
+}
