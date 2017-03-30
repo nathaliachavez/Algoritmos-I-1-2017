@@ -1,0 +1,36 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+
+using namespace std;
+
+bool palindromo (string C);
+
+void main()
+{
+	string C;
+	bool k=false;
+	cout<<"ingrese la cadena : ";
+	getline (cin , C);
+	k=palindromo (C);
+	if (k==true)
+		cout<<"Es Palindromo ";
+
+	else 
+		cout<<"No es Palindromo" ;
+	getch();
+}
+ bool palindromo (string C)
+{
+	bool k=true;
+	int l=C.length() , i;//length() devuelve el tamaño de la cadena C
+	for(i=0;i<(l/2);i++){
+		if (C[i]!= C[l-1-i]) //
+		{
+			k=false;
+			return k;
+		}
+	}
+	return k;
+}
