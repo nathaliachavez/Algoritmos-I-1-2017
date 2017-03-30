@@ -1,0 +1,69 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+#define MAX 100
+
+using namespace std;
+//no se puede utilzar la misma funcion
+void cargarvector(int notas[] , int n);
+void cargarvectors(string alumnos[], int n);
+void burbuja(int notas[],string alumnos[],int n);
+void mostrarvectores(int notas[],string alumnos[], int n);
+
+void main()
+
+{
+	int n,notas[MAX];
+    string alumnos[MAX];//arreglo de strings
+	do{
+	      cout<<"ingrese el tamano del vector"<<endl;
+		  cin>>n;
+	} while((n<=0) || (n>MAX));
+	cargarvectors(alumnos,n);
+	cargarvector(notas,n);
+	burbuja(notas,alumnos,n);
+	mostrarvectores(notas,alumnos,n);
+	getch();
+}
+void cargarvector(int notas[] , int n)
+{
+	int i;
+    for(i=0;i<n;i++)
+	{
+		cout<<"nota["<<i<<"]:";
+		cin>>notas[i];
+	}
+}
+void cargarvectors(string alumnos[], int n)
+{
+	cin.ignore(); //antes hay un cin que tiene caracter basura
+	for (int i=0;i<n;i++)
+	{
+		cout<<"alumnos["<<i<<"]:";
+		getline(cin, alumnos[i]); //no debe saltar el getline
+	}
+}
+void burbuja(int notas[],string alumnos[],int n)
+{
+	int notasaux;
+	string alumnosaux;
+	//descendente de mayor a menor
+	for (int i=0;i<n-1;i++)
+		for (int j=i+1;j<n;j++)
+			if (notas[i]<notas[j])
+			{
+				notasaux=notas[j];
+				notas[j]=notas[i];
+				notas[i]=notasaux;
+				//array paralelo
+				alumnosaux=alumnos[j];
+				alumnos[j]=alumnos[i];
+				alumnos[i]=alumnosaux;
+			}
+}
+void mostrarvectores(int notas[],string alumnos[], int n)
+{
+	for(int i=0;i<n;i++)
+		cout<<alumnos[i]<<"\t"<<notas[i]<<endl;
+}
