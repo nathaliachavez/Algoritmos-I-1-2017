@@ -1,0 +1,157 @@
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include <string>
+
+using namespace std;
+
+void main()
+{
+	int longitud,cont,pos,opcion;
+	char aux;
+
+	string var1, var2, nombre; 
+	do
+	{
+		cout<<"					  MENU		      "<<endl;
+		cout<<" 1.-Determinar la longitud de un string "<<endl;
+		cout<<" 2.-Determinar si dos cadenas son iguales "<<endl;
+		cout<<" 3.- Numero de vocales en un nombre "<<endl;
+		cout<<" 4.- Sacar una parte del string "<<endl;
+		cout<<" 5.- Intercambiar string "<<endl;
+		cout<<" 6.- Encuentra caracteres en string "<<endl;
+		cout<<" 7.- Invertir una frase "<<endl;
+		cout<<" 8.- Quitar las vocales "<<endl;
+		cout<<" 0.- Salir:"<<endl;
+		cout<<" Ingrese la opcion:"<<endl;
+		cin>>opcion;
+
+
+		switch (opcion)
+		{ 
+		case 1:
+			{
+				cout<<"ingrese un nombre:"<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				longitud=nombre.length();
+				cout<<"El string tiene "<<longitud<<" de longitud"<<endl;
+				break;
+			}
+		case 2:
+			{
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				cout<<"Ingrese otro nombre: "<<endl;
+				getline(cin,var2);
+				if (nombre.compare(var2) == 0 )
+					cout<<endl<<"Los datos coinciden"<<endl;
+				else 
+					cout << nombre << " es diferente que "<<var2<<endl;
+				break;
+			}
+		case 3:
+			{
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				longitud=nombre.length();
+				cont=0;
+				for (int i=0;i<longitud;i++)
+				{
+					if (nombre[i]=='a' || nombre[i]=='e'||nombre[i]=='i'||nombre[i]=='o'||nombre[i]=='u')
+						cont++;
+				}
+				cout<<"Numero de vocales: "<<cont<<endl;
+				break;
+			}
+		case 4:
+			{
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				cout<<"Ingrese desde donde desea extraer el nombre escrito: ";
+				cin>>pos;
+				cout <<nombre[(pos-1)];
+				break; 
+			}
+		case 5:
+			{
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				cout<<"Ingrese otro nombre: "<<endl;
+				getline(cin,var2);
+				nombre.swap(var2);
+				cout << nombre<<endl;
+				cout << var2<<endl;
+				break;
+			}
+		case 6:
+			{ 
+				char b;
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,var2);
+				cout<<" ingrese el caracter a buscar:"<<endl;
+				cin>>b;
+				longitud=var2.length();
+				for (int i=0;i<longitud;i++)
+					if (var2[i] ==b )
+						cout << endl<<"Existe la letra"<<b<<"en la posicion:"<<(i+1)<<endl;
+			}
+			break;
+		case 7:
+			{ 
+				cout<<"Ingrese un nombre: "<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				var2=nombre;
+				longitud=nombre.length();
+				for (int i=0;i<longitud/2;i++)
+				{
+					aux=nombre[i];
+					nombre[i]=nombre[longitud-1-i];
+					nombre[longitud-1-i]=aux;
+				}
+				cout <<"La cadena invertida es: "<< nombre<<endl;
+				if (var2.compare(nombre)==0)
+					cout<<"Es un palindromo";
+				break;
+			}
+		case 8:
+			{ 
+				cout<<"Ingrese un nombre:"<<endl;
+				cin.ignore();
+				getline(cin,nombre);
+				var2="                     ";
+				cont=0;
+				longitud=nombre.length();
+				for (int i=0;i<longitud;i++)
+				{
+					if (nombre[i]!='a' && nombre[i]!='e'&& nombre[i]!='i'&& nombre[i]!='o'&& nombre[i]!='u')
+					{
+						var2[cont]=nombre[i];
+						cont++;
+					}
+				}
+					cout<<"Sin vocales es: "<<var2<<endl;
+					break;
+			}
+		case 0:
+			{
+				cout<<"fin del programa:"<<endl;
+				break;
+			}
+		default:
+			{
+				cout<<"opcion invalida:"<<endl;
+			}
+			}
+
+			}while (opcion!=0);
+			getch();
+		}
+
+	 
