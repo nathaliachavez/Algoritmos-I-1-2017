@@ -1,0 +1,261 @@
+#include "stdafx.h"
+#include<iostream>
+#include "conio.h"
+#include <string>
+#include "stdio.h"
+#include "stdlib.h"
+
+using namespace std;
+
+void ALTA_SECUENCIAL(void);
+void CONSULTA_SECUENCIAL(void);
+void LISTADO_SECUENCIAL(void);
+void MODIFICACION_SECUENCIAL(void);
+void BAJA_LOGICA_SECUENCIAL(void);
+
+struct tipo_registro
+{
+	int cod_usuario;
+	string nom_usuario; 
+	int contrasenha;
+};
+tipo_registro Registro;
+FILE *alias;
+
+void main()
+{
+	int opcion;
+	do{
+	cout<<"-----------------MENU-----------------"<<endl;
+	cout<<"1. Adicionar un usuario"<<endl;
+	cout<<"2. Hacer un listado de los usuarios"<<endl;
+	cout<<"3. Modificar un usuario"<<endl;
+	cout<<"4. Dar de baja un usuario"<<endl,
+	cout<<"0. Para terminar el programa"<<endl;
+	cout<<"Digite su opcion: ";
+	cin>>opcion;
+	switch(opcion)
+	{
+	case 1:
+		{
+			ALTA_SECUENCIAL();
+			break;
+		}
+	case 2:
+		{
+			LISTADO_SECUENCIAL();
+			break;
+		}
+	case 3:
+		{
+			MODIFICACION_SECUENCIAL();
+			break;
+		}
+	case 4:
+		{
+			BAJA_LOGICA_SECUENCIAL();
+			break;
+		}
+	case 0:
+		{
+			cout<<"Fin programa"<<endl;
+			break;
+		}
+	default:
+		{
+			cout<<"Opcion invalida ingrese de nuevo"<<endl;
+			break;
+		}
+	}
+	}while(opcion!=0);
+	getch();
+}
+void ALTA_SECUENCIAL(void) 
+{ 
+	int cod_usuario;
+	cout << "\n\rALTAS DE REGISTROS DE PRODUCTOS"; 
+	alias=fopen("PRODUCTO.SEC","rb+"); 
+	if(alias==NULL) 
+		alias=fopen("PRODUCTO.SEC","wb"); 
+	cout << "\n\n\n\rCodigo de usuario: ";
+	cin >> cod_usuario; 
+	fread(&Registro,sizeof(Registro),1,alias); 
+	while(!feof(alias)) 
+	{ 
+		if(Registro.cod_usuario==cod_usuario) 
+		{ 
+			cout << "\n\n\n\rRegistro duplicado !!!"; 
+			fclose(alias); 
+			getch(); 
+			return; 
+		} 
+		fread(&Registro,sizeof(Registro),1,alias); 
+	}     
+	cout << "\n\rNombre de usuario: "; 
+	cin.ignore();
+	getline(cin,Registro.nom_usuario);
+	cout << "\n\rContrasenha   : "; 
+	cin >> Registro.contrasenha; 
+	Registro.cod_usuario=cod_usuario; 
+	fwrite(&Registro,sizeof(Registro),1,alias); 
+	fclose(alias); 
+	cout << "\n\n\n\rProducto registrado !!!"; 
+	cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+	getch(); 
+	return; 
+} 
+void CONSULTA_SECUENCIAL(void) 
+{ 
+	int cod_usuario; 
+	system("cls"); 
+	cout << "\n\rCONSULTA DE REGISTROS DE PRODUCTOS"; 
+	alias=fopen("PRODUCTO.SEC","rb"); 
+	if(alias==NULL) 
+	{ 
+		cout << "\n\n\n\rNo existe el archivo !!!"; 
+		cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+		getch(); 
+		return; 
+	} 
+	cout << "\n\n\n\rCodigo de usuario: "; cin >> cod_usuario; 
+	fread(&Registro,sizeof(Registro),1,alias); 
+	while(!feof(alias))  
+	{ 
+		if(Registro.cod_usuario==cod_usuario) 
+		{ 
+			cout << "\n\rCodigo de Usuario        Nombre de Usuario             Contrasenha       "; 
+			cout << "\n\r------------------------------------------------------------------------"<<endl; 
+			cout<<Registro.cod_usuario<<"                "<<Registro.nom_usuario<<"            "<<Registro.contrasenha<<endl; 
+			fclose(alias); 
+			cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+			getch(); 
+			return; 
+		} 
+		fread(&Registro,sizeof(Registro),1,alias); 
+	} 
+	cout << "\n\rNo se encuentra ese registro !!!"; 
+	fclose(alias); 
+	cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+	getch(); 
+	return; 
+} 
+void LISTADO_SECUENCIAL(void) 
+{ 
+	cout << "\n\rLISTADO DE REGISTROS DE PRODUCTOS"; 
+	alias=fopen("PRODUCTO.SEC","rb"); 
+	if(alias==NULL) 
+	{ 
+		cout << "\n\n\n\rNo existe el archivo !!!"; 
+		cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+		getch(); 
+		return; 
+	} 
+	cout << "\n\rCodigo de Usuario        Nombre de Usuario             Contrasenha       "; 
+	cout << "\n\r------------------------------------------------------------------------"<<endl; 
+	fread(&Registro,sizeof(Registro),1,alias); 
+	while(!feof(alias)) 
+	{ 
+		cout<<Registro.cod_usuario<<"                "<<Registro.nom_usuario<<"            "<<Registro.contrasenha<<endl;
+		fread(&Registro,sizeof(Registro),1,alias); 
+	} 
+	fclose(alias);
+	cout << "\n\r------------------------------------------------------------------------"; 
+	cout << "\n\rFin del listado !!!"; 
+	cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+	getch(); 
+	return; 
+}
+
+void MODIFICACION_SECUENCIAL(void) 
+{ 
+	int cod_usuario; 
+	system("cls"); 
+	cout << "\n\rMODIFICACION DE REGISTROS DE PRODUCTOS"; 
+	alias=fopen("PRODUCTO.SEC","rb+"); 
+	if(alias==NULL)
+	{ 
+		cout << "\n\n\n\rNo existe el archivo !!!"; 
+		cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+		getch(); 
+		return; 
+	} 
+	cout << "\n\n\n\rCodigo del producto: "; cin >> cod_usuario; 
+	fread(&Registro,sizeof(Registro),1,alias); 
+	while(!feof(alias))
+	{ 
+		if(Registro.cod_usuario==cod_usuario) 
+		{ 
+			cout << "\n\rCodigo de Usuario        Nombre de Usuario             Contrasenha       "; 
+			cout << "\n\r------------------------------------------------------------------------"<<endl; 
+			cout<<Registro.cod_usuario<<"                "<<Registro.nom_usuario<<"            "<<Registro.contrasenha<<endl; 
+			cout << "\n\n\n\rAnote los nuevos datos ..."; 
+			cout << "\n\rNombre de usuario: "; 
+			cin.ignore();
+			getline(cin,Registro.nom_usuario); 
+			cout << "\n\rContrasenha: "; 
+			cin >> Registro.contrasenha; 
+			fseek(alias,ftell(alias)-sizeof(Registro),SEEK_SET); 
+			fwrite(&Registro,sizeof(Registro),1,alias);  
+			fclose(alias);
+			cout << "\n\n\n\rRegistro modificado !!!"; 
+			cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+			getch(); 
+			return; 
+		} 
+		fread(&Registro,sizeof(Registro),1,alias); 
+	} 
+	cout << "\n\rNo se encuentra ese registro !!!"; 
+	fclose(alias); 
+	cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+	getch(); 
+	return; 
+} 
+void BAJA_LOGICA_SECUENCIAL(void) 
+{ 
+	int cod_usuario; 
+	char op; 
+	system("cls"); 
+	cout << "\n\rBAJAS LOGICAS DE REGISTROS DE PRODUCTOS"; 
+	alias=fopen("PRODUCTO.SEC","rb+"); 
+	if(alias==NULL)  
+	{ 
+		cout << "\n\n\n\rNo existe el archivo !!!"; 
+		cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+		getch(); 
+		return; 
+	} 
+	cout << "\n\n\n\rCodigo del usuario: "; cin >> cod_usuario; 
+	fread(&Registro,sizeof(Registro),1,alias); 
+	while(!feof(alias)) 
+	{ 
+		if(Registro.cod_usuario==cod_usuario) 
+		{ 
+			cout << "\n\rCodigo de Usuario        Nombre de Usuario             Contrasenha       "; 
+			cout << "\n\r------------------------------------------------------------------------"<<endl; 
+			cout<<Registro.cod_usuario<<"                "<<Registro.nom_usuario<<"            "<<Registro.contrasenha<<endl; 
+			Registro.cod_usuario=0; 
+			Registro.nom_usuario=""; 
+			Registro.contrasenha=0; 
+			do { 
+				cout << "\n\n\rEsta seguro que desea borrarlo? [S/N] ---> "; 
+				op=toupper(getche()); 
+			}while(op!='S' && op!='N'); 
+			if(op=='S') 
+			{ 
+				fseek(alias,ftell(alias)-sizeof(Registro),SEEK_SET);      
+				fwrite(&Registro,sizeof(Registro),1,alias);   
+				cout << "\n\n\n\rRegistro eliminado !!!"; 
+			} 
+			fclose(alias);   
+			cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+			getch(); 
+			return; 
+		} 
+		fread(&Registro,sizeof(Registro),1,alias); 
+	} 
+	cout << "\n\rNo se encuentra ese registro !!!"; 
+	fclose(alias); 
+	cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+	getch(); 
+	return; 
+}
