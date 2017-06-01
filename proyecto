@@ -1,0 +1,400 @@
+// ProyectoEnergiaEolica.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <conio.h>
+#include <stdio.h>
+#include <iostream>
+#include <string>
+using namespace std;
+
+//nivel: 1->usuario, 2->Molino, 3-> Empresa
+struct Usuario
+{
+	int id;
+	string nombre;
+	string contrasenha;
+	int estado;
+};
+
+struct empresa{
+	int no_empresa;
+	string nombre;
+	string direccion;
+	int telefono;
+	string localidad;
+};
+struct administracion{
+
+
+void ALTA_SECUENCIAL(void);
+void LISTADO_SECUENCIAL(void);
+void MODIFICACION_SECUENCIAL(void);
+void CONSULTA_SECUENCIAL(void);
+void BAJA_FISICA_SECUENCIAL(void);
+void BAJA_LOGICA_SECUENCIAL(void);
+void MenuVentas();
+void MenuMolinos();
+void MenuEmpresas();
+void MenuInicio();
+
+Usuario usuario;
+
+void main()
+{
+	Usuario usr;
+	int opcion = -1;
+	do
+	{
+		cout<<"1. Iniciar sesion"<<endl;
+		cout<<"2. Nuevo usuario"<<endl;
+		cout<<"0. Salir"<<endl;
+		cout<<"Ingrese la opcion escogida: ";
+		cin>>opcion;
+
+		switch(opcion)
+		{
+		case 1:
+			//IngresarUsuario(usr);
+			if(usr.nombre == "adm" && usr.contrasenha=="adm123")
+			{
+				usuario = usr;
+			}
+			MenuInicio();
+			break;
+		case 2:
+			//NuevoUsuario();
+			break;
+		default:
+			break;
+		}
+	}while(opcion != 0);
+      getch();
+}
+
+
+
+void MenuVentas()
+{
+	int opcion = -1;
+	do
+	{
+		cout<<"-----------Ventas------------"<<endl;
+		cout<<"1. Adicionar"<<endl;
+		cout<<"2. Listar"<<endl;
+		cout<<"3. Modificar"<<endl;
+		cout<<"4. Eliminar"<<endl;
+		cout<<"0. Salir"<<endl;
+		cout<<"Ingrese la opcion escogida:";
+		cin>>opcion;
+
+		switch(opcion)
+		{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+			break;
+		}
+	}while(opcion != 0);
+}
+void MenuMolinos()
+{
+	int opcion = -1;
+	do
+	{
+		cout<<"---------Molinos afiliados-------------"<<endl;
+		cout<<"1. Adicionar"<<endl;
+		cout<<"2. Listar"<<endl;
+		cout<<"3. Modificar"<<endl;
+		cout<<"4. Eliminar"<<endl;
+		cout<<"0. Salir"<<endl;
+		cout<<"Ingrese la opcion escogida:";
+		cin>>opcion;
+		switch(opcion)
+		{
+
+		     case 1:
+			      break;
+		     case 2:
+			      break;
+		     case 3:
+			      break;
+		     case 4:
+			      break;
+		     default:
+			      break;
+
+		}
+	}while(opcion != 0);
+}
+void MenuEmpresas()
+{
+	int opcion = -1;
+	do
+	{
+		cout<<"---------Empresas-------------"<<endl;
+		cout<<"1. Adicionar"<<endl;
+		cout<<"2. Listar"<<endl;
+		cout<<"3. Modificar"<<endl;
+		cout<<"4. Eliminar"<<endl;
+		cout<<"0. Salir"<<endl;
+		cout<<"Ingrese la opcion escogida:";
+		cin>>opcion;
+
+		switch(opcion)
+		{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		default:
+			break;
+		}
+	}while(opcion != 0);
+}
+void MenuInicio()
+{
+	int opcion = -1;
+	do
+	{
+		cout<<"1. Ventas"<<endl;
+		cout<<"2. Molinos Afiliados"<<endl;
+		cout<<"3. Empresas"<<endl;
+		cout<<"4. Ver Ganancias"<<endl;
+		cout<<"0. Salir"<<endl;
+		cout<<"opcion escogida:";
+		cin>>opcion;
+
+		switch(opcion)
+		{
+		case 1:
+			MenuVentas();
+			break;
+		case 2:
+			MenuMolinos();
+			break;
+		case 3:
+			MenuEmpresas();
+			break;
+		default:
+			break;
+		}
+	}while(opcion != 0);
+}
+void ALTA_SECUENCIAL(void) 
+{ 
+	
+  int no_empresa; 
+  cout << "\n\rADICION DE REGISTROS DE EMPRESAS"; 
+  alias=fopen("EMPRESAS.SEC","rb+");
+  if(alias==NULL) 
+    alias=fopen("EMPRESAS.SEC","wb");
+  cout << "\n\n\n\rNumero de empresa: "; 
+  cin >> no_empresa; 
+  fread(&Registro,sizeof(Registro),1,alias);  
+  while(!feof(alias)) 
+  { 
+    if(Registro.no_empresa==no_empresa) 
+    { 
+       cout << "\n\n\n\rRegistro duplicado !!!"; 
+       fclose(alias); 
+       getch(); 
+       return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNombre     : "; 
+  cin.ignore();
+  getline(cin, Registro.nombre);
+  cin.ignore();
+  cout << "\n\rDireccion: "; 
+  getline(cin,Registro.direccion); 
+  cout << "\n\rTelefono   : "; 
+  cin >> Registro.telefono; 
+  cout << "\n\rLocalidad     : "; 
+  cin.ignore();
+  getline(cin,Registro.localidad); 
+  Registro.no_empresa=no_empresa; 
+  fwrite(&Registro,sizeof(Registro),1,alias); 
+  fclose(alias);  
+  cout << "\n\n\n\rEmpresa registrada !"; 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+} 
+
+void LISTADO_SECUENCIAL(void) 
+{ 
+  cout << "\n\rLISTADO DE EMPRESAS REGISTRADAS"; 
+  alias=fopen("EMPRESAS.SEC","rb"); 
+  if(alias==NULL) 
+  { 
+    cout << "\n\n\n\rNo existe el archivo."; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout<< "\n\rNo Empresa       Nombre              Direccion                Telefono    Localidad "<<endl; 
+  cout << "\n\r---------------------------------------------------------------------------------------"<<endl; 
+  fread(&Registro,sizeof(Registro),1,alias); 
+  while(!feof(alias)) 
+  { 
+	  cout<<Registro.no_empresa<<"\t""\t"<<Registro.nombre<<"\t""\t"<<Registro.direccion<<"\t""\t"<<Registro.telefono<<"\t""\t"<<Registro.localidad<<endl; 
+	  fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  fclose(alias);
+ cout << "\n\r---------------------------------------------------------"; 
+  cout << "\n\rFin del listado !!!"; 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+}
+
+void MODIFICACION_SECUENCIAL(void) 
+{ 
+  int no_empresa; 
+  cout << "\n\rMODIFICACION DE EMPRESAS REGISTRADAS"; 
+  alias=fopen("EMPRESAS.SEC","rb+");
+  if(alias==NULL) 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rNumero de empresa: "; 
+  cin >> no_empresa; 
+  fread(&Registro,sizeof(Registro),1,alias); 
+  while(!feof(alias)) 
+  { 
+    if(Registro.no_empresa==no_empresa) 
+    { cin.ignore();
+      cout<< "\n\rNo Empresa       Nombre              Direccion                Telefono    Localidad "<<endl;
+      cout << "\n\r------------------------------------------------------------------------------------"<<endl; 
+	  cout<<Registro.no_empresa<<"\t""\t"<<Registro.nombre<<"\t""\t"<<Registro.direccion<<"\t""\t"<<Registro.telefono<<"\t""\t"<<Registro.localidad<<endl;
+	  cout << "\n\n\n\rAnote los nuevos datos ..."; 
+	  cout << "\n\rNombre     : "; 
+	  cin.ignore();
+	  getline(cin, Registro.nombre);
+	  cin.ignore();
+	  cout << "\n\rDireccion: "; 
+	  getline(cin,Registro.direccion); 
+	  cout << "\n\rTelefono   : "; 
+	  cin >> Registro.telefono; 
+	  cout << "\n\rLocalidad     : "; 
+	  cin.ignore();
+	  getline(cin,Registro.localidad);  
+      fseek(alias,ftell(alias)-sizeof(Registro),SEEK_SET); 
+      fwrite(&Registro,sizeof(Registro),1,alias);
+      fclose(alias);  
+      cout << "\n\n\n\rRegistro de empresa modificado !!!"; 
+      cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+      getch(); 
+      return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNo se encuentra ese registro !!!"; 
+  fclose(alias); 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+} 
+
+void CONSULTA_SECUENCIAL(void) 
+{ 
+  int no_empresa; 
+  cout << "\n\rCONSULTA DE REGISTROS DE PRODUCTOS"; 
+  alias=fopen("EMPRESAS.SEC","rb"); // Intenta abrir el archivo PRODUCTO.SEC 
+                             // en modo de solo lectura 
+  if(alias==NULL) 
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rNumero de empresa: "; 
+  cin >> no_empresa; 
+  fread(&Registro,sizeof(Registro),1,alias);
+  while(!feof(alias))  
+  { 
+    if(Registro.no_empresa==no_empresa) 
+    { 
+      cout<< "\n\rNo Empresa       Nombre              Direccion                Telefono    Localidad "<<endl;
+      cout << "\n\r------------------------------------------------------------------------------------"<<endl; 
+	  cout<<Registro.no_empresa<<"\t""\t"<<Registro.nombre<<"\t""\t"<<Registro.direccion<<"\t""\t"<<Registro.telefono<<"\t""\t"<<Registro.localidad<<endl;
+      fclose(alias); 
+      cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+      getch(); 
+      return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNo se encuentra ese registro !!!"; 
+  fclose(alias); 
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+} 
+
+void BAJA_LOGICA_SECUENCIAL(void) 
+{ 
+  int no_empresa;  
+  char op;  
+  cout << "\n\rBAJAS LOGICAS DE EMPRESAS REGISTRADAS"; 
+  alias=fopen("EMPRESAS.SEC","rb+");
+  if(alias==NULL)
+  { 
+    cout << "\n\n\n\rNo existe el archivo !!!"; 
+    cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+    getch(); 
+    return; 
+  } 
+  cout << "\n\n\n\rNumero de empresa: "; cin >> no_empresa; 
+  fread(&Registro,sizeof(Registro),1,alias); 
+  while(!feof(alias))  
+  { 
+    if(Registro.no_empresa==no_empresa) 
+    { 
+      cout<< "\n\rNo Empresa       Nombre              Direccion                Telefono    Localidad "<<endl;
+      cout << "\n\r------------------------------------------------------------------------------------"<<endl; 
+	  cout<<Registro.no_empresa<<"\t""\t"<<Registro.nombre<<"\t""\t"<<Registro.direccion<<"\t""\t"<<Registro.telefono<<"\t""\t"<<Registro.localidad<<endl;
+      Registro.no_empresa=0; 
+      Registro.nombre=""; 
+	  Registro.direccion="";
+      Registro.telefono=0;  
+      Registro.localidad=' '; 
+      do { 
+        cout << "\n\n\rEsta seguro que desea borrarlo? [S/N] ---> "; 
+        op=toupper(getche()); 
+      }while(op!='S' && op!='N'); 
+      if(op=='S')       
+	  { 
+            fseek(alias,ftell(alias)-sizeof(Registro),SEEK_SET);      
+			fwrite(&Registro,sizeof(Registro),1,alias); 
+			cout << "\n\n\n\rRegistro de empresa eliminado !!!"; 
+      } 
+      fclose(alias); 
+      cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+      getch(); 
+      return; 
+    } 
+    fread(&Registro,sizeof(Registro),1,alias); 
+  } 
+  cout << "\n\rNo se encuentra ese registro !!!"; 
+  fclose(alias);
+  cout << "\n\r<<< Oprima cualquier tecla para continuar >>>"; 
+  getch(); 
+  return; 
+}
