@@ -1,0 +1,12 @@
+//funcion eliminar repetidos
+void eliminarRepetidos(int v[]¨, int &n)
+{
+	int i=0;
+	while (i<n)
+	{
+		if (cantidadVeces(v,n,v[i])>1)
+			eliminarPosicion(v,n,i);
+		else
+			i=i+1;
+	}
+}
