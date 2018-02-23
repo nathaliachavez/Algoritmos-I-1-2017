@@ -1,0 +1,108 @@
+#include "stdafx.h"
+#include "conio.h"
+#include "iostream"
+using namespace std;
+
+void cargar(int v[], int n)
+{
+ int x; 
+ for(int i=0;i<n;i++)
+ {
+	 cout<<"Elemento:";
+	 cin>>x;
+	 v[i]=x;
+ }
+}
+
+void mostrar(int v[], int n)
+{
+ for(int i=0;i<n;i++)
+	 cout<<v[i];
+
+ cout<<endl;
+}
+
+void insertarPosicion(int v[], int &n, int x, int pos)
+{
+ if(pos < 0 || pos > n)
+	 cout<<"Posicion no valida...!!!";
+ else
+ {
+   int k=n-1;
+   while(k>=pos)
+   {
+      v[k+1]=v[k];
+	  k--;
+   }
+   v[pos]=x;
+   n=n+1;
+ }
+}
+
+void insertarUlt(int v[], int &n, int x)
+{
+   insertarPosicion(v,n,x,n); 
+}
+
+void insertarPri(int v[], int &n, int x)
+{
+   insertarPosicion(v,n,x,0); 
+}
+
+//funcion que elimina una posicion del vector
+void eliminarPosicion(int v[], int &n, int pos)
+{
+ if(pos < 0 || pos > n)
+  	cout<<"Posicion no valida...!!!";
+ else
+ {
+    int k=pos + 1;
+    while(k < n)
+    {
+       v[k-1]=v[k];
+	   k++;
+    }	
+    n=n-1;
+ }
+}
+
+void eliminarPri(int v[], int &n)
+{
+   eliminarPosicion(v,n,0); 
+}
+
+void eliminarUlt(int v[], int &n)
+{
+   eliminarPosicion(v,n,n-1); 
+}
+
+//funcion que elimina los elementos pares
+void eliminarPares(int v[], int &n)
+{
+  int i=0;
+  while(i<n)
+  {
+     if(v[i] % 2 == 0)
+		 eliminarPosicion(v,n,i);
+	 else
+		 i++;
+  }  
+}
+
+void main()
+{
+	int n,pos,x;
+	int v[50];
+	cout<<"Dimension del vector:";
+	cin>>n;
+	cargar(v,n);
+	mostrar(v,n);
+	//cout<<"Elemento:";
+	//cin>>x;
+	//cout<<"Posicion:";
+	//cin>>pos;
+	eliminarUlt(v,n);
+	mostrar(v,n);
+	getch();
+}
+
