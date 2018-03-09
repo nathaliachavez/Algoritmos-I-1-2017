@@ -1,0 +1,132 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+
+using namespace std;
+
+void cargar (int v[], int n);
+void mostrar (int v[], int n);
+int sumaImpares(int v[],int n);
+bool ordenarDesc(int v[], int n);
+bool existe (int v[], int n,int x);
+int fact(int n);
+
+
+void main()
+{
+int v[50],n,k;
+	cout<<"Ingrese el tamano del vector: ";
+	cin>>n;	
+	cout<<"El vector cargado es: "<<endl;
+	mostrar(v,n);
+	cout<<"Ingrese la suma de numeros impares de un vector:";
+	cin>>n;
+	mostrar(v,n);
+	cout<<"Verificar si los elementos de un vector estan ordenados de manera descendente:";
+	cin>>k;
+	mostrar(v,n);
+getch();
+}
+
+void cargar (int v[], int n,int x)
+{
+	for (int i=0;i<n;i++)
+	{
+		cout<<"V[ "<<i<<" ]= ";
+		cin>>x;
+		v[i]=x;
+	}
+}
+
+void mostrar (int v[], int n)
+{
+	for(int i=0; i<n; i++)
+		cout<<v[i]<<" ";
+	cout<<endl;
+}
+
+//Suma los numeros impares de un vector
+int sumaImpares(int v[],int n)
+{
+	if(v[0]%2==1)
+		return v[0];
+	else 
+		return 0;
+	{
+
+	int s=sumaImpares(v,n-1);
+		if(v[n-1]%2==1)
+	   return s+v[n-1];
+	else 
+		return s;
+		}
+	}
+
+
+
+// verificar si los elementos de un vector estan ordenados de manera descendente
+
+bool ordenarDesc(int v[], int n)
+{
+	if(n==1)
+		return true;
+	else
+	{
+		bool k=ordenarDesc(v,n-1);
+			if(k==true)
+			{
+			  if (v[n-1]>v[n-2])
+				  return true;
+			  else 
+				  return false;
+			}
+			else 
+				return false;
+	}
+}
+
+//verificar si un valor x, existe entre los elementos de un vector 
+//ej 4 7 9 2 5   x=7
+
+bool existe (int v[], int n,int x)
+{
+	if(n==1)
+	{
+		if(v[0]==x)
+			return true;
+		else
+			return false;
+	}
+	else 
+	{
+		bool k=existe(v,n-1,x);
+		if(k==true)
+			return true;
+		else
+		{
+			if(v[n-1]==x)
+				return true;
+			else
+				return false;
+		}
+	}
+}
+
+
+	 
+// dado un vector de elementos, cambiar sus valores encontrando el factorial de cada uno de sus elementos
+// ej 4 3 2 5	resultado=24
+
+void vectorFactorial(int v[], int n)
+{
+	if(n==1)
+		v[0]=factorial(v[0]);
+	else
+	{
+		vectorFactorial(v,n-1);
+		v[n-1]=factorial(v[n-1]);
+	}
+}
+
+
+
