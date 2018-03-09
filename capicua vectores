@@ -1,0 +1,63 @@
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+
+using namespace std;
+
+void cargar (int v[], int n)
+{
+	for (int i=0;i<n;i++)
+	{
+		cout<<"V[ "<<i<<" ]= ";
+		cin>>v[i];
+	}
+}
+
+void mostrar (int v[], int n)
+{
+	for (int i=0;i<n;i++)
+	{
+		cout<<"V[ "<<i<<" ]= "<<v[i]<<endl;
+	}
+}
+
+bool capicua(int v[],int i, int k)
+{
+	int n=k-i+1;
+	if(n == 1)
+		return true;
+	else
+	{
+		if(n == 2)
+		{
+			if(v[i] == v[k])
+				return true;
+			else
+				return false;
+		}else{
+			bool x=capicua(v,i+1,k-1);
+			if((v[i] == v[k]) && (x == true))
+				return true;
+			else
+				return false;
+		}
+	}
+}
+
+void main()
+{
+	int v[50],n;
+	bool c;
+	cout<<"Ingrese el tamano del vector: ";
+	cin>>n;
+	cargar(v,n);	
+	cout<<"El vector cargado es: "<<endl;
+	mostrar(v,n);
+	c=capicua(v,0,n-1);
+	if(c==true)
+		cout<<"Es capicua"<<endl;
+	else
+		cout<<"No es capicua"<<endl;
+
+	getch();
+}
