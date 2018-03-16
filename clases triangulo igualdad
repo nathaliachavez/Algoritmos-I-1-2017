@@ -1,0 +1,77 @@
+#include "stdafx.h"
+#include "iostream"
+#include "math.h"
+using namespace std;
+
+
+class triangulo
+{
+	private:
+		int base;
+		int altura;
+	public:
+		triangulo()
+		{
+			base=0;
+			altura=0;
+		}
+
+//metodos setters (insertar valores a los atributos)
+void setBase(int b)
+{
+	base=b;
+}
+void setAltura(int a)
+{
+	altura=a;
+}
+
+//metodos getters (devuleven valores de los atributos)
+int getBase()
+{
+	return base;
+}
+int getAltura()
+{
+	return altura;
+}
+
+//metodo de la clase triangulo
+float area()
+{
+	return (base*altura)/2;
+}
+
+float hipotenusa()
+{
+	return sqrtf ((base*base) + (altura*altura));
+}
+
+bool iguales(triangulo t1)
+{
+	if(t1.getBase()==getBase() && t1.getAltura()==getAltura())//segundo triangulo
+		return true;
+	else 
+	
+		return false;
+}
+ 
+}; //end class
+
+
+void main()
+{
+	int b,a,h;
+	float at;
+	triangulo t1,t2;
+	cout<<"base:";
+	cin>>b;
+	t1.setBase(b);
+	cout<<"altura:";
+	cin>>a;
+	t1.setAltura(a);
+	if(t2.iguales(t1))
+		cout<<"triangulos iguales:";
+	else
+	cout<<" no son triangulos iguales:";
+}
